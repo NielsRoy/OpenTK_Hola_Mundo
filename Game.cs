@@ -9,11 +9,9 @@ namespace OpenTK_Hola_Mundo
 {
     public class Game : GameWindow
     {
-        float[] vertices = {
-            -0.5f, -0.5f, 0.0f, //Bottom-left vertex
-             0.5f, -0.5f, 0.0f, //Bottom-right vertex
-             0.0f,  0.5f, 0.0f  //Top vertex
-        };
+        Television tv;
+        Television tv2;
+
 
         public Game(int width, int height, string title) : base(width, height, GraphicsMode.Default, title) { }
 
@@ -24,9 +22,10 @@ namespace OpenTK_Hola_Mundo
 
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
-
             GL.Enable(EnableCap.DepthTest);
 
+            tv = new Television(new Vector3(0.2f, 0.2f, 0.5f));
+            tv2 = new Television(new Vector3(0.5f, 0.5f, 0.0f));
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -38,7 +37,7 @@ namespace OpenTK_Hola_Mundo
 
             GL.Translate(0.0f, 0.0f, -3.0f);
             GL.Rotate(25.0f, 1.0, 0.0, 0.0);
-            GL.Rotate(-25.0f, 0.0, 1.0, 0.0);
+            GL.Rotate(-45.0f, 0.0, 1.0, 0.0);
 
             GL.Begin(BeginMode.Lines);
             GL.Color4(Color4.Cyan);
@@ -52,65 +51,10 @@ namespace OpenTK_Hola_Mundo
             GL.Color4(Color4.Yellow);
             GL.Vertex3(0.0f, 0.0f, 0.0f);
             GL.Vertex3(0.0f, 0.0f, 1.0f);
-
             GL.End();
 
-            GL.Color4(Color4.White);
-            GL.Begin(BeginMode.LineLoop);
-            GL.Vertex3(0.2f, 0.2f, 0.0f);
-            GL.Vertex3(0.7f, 0.2f, 0.0f);
-            GL.Vertex3(0.7f, 0.5f, 0.0f);
-            GL.Vertex3(0.2f, 0.5f, 0.0f);
-            GL.End();
-
-            GL.Color4(Color4.Gray);
-            GL.Begin(BeginMode.LineLoop);
-            GL.Vertex3(0.2f, 0.2f, -0.05f);
-            GL.Vertex3(0.7f, 0.2f, -0.05f);
-            GL.Vertex3(0.7f, 0.5f, -0.05f);
-            GL.Vertex3(0.2f, 0.5f, -0.05f);
-            GL.End();
-
-
-
-            GL.Begin(BeginMode.Lines);
-
-            GL.Vertex3(0.2f, 0.2f, 0.0f);
-            GL.Vertex3(0.2f, 0.2f, -0.05f);
-
-            GL.Vertex3(0.7f, 0.2f, 0.0f);
-            GL.Vertex3(0.7f, 0.2f, -0.05f);
-
-            GL.Vertex3(0.7f, 0.5f, 0.0f);
-            GL.Vertex3(0.7f, 0.5f, -0.05f);
-
-            GL.Vertex3(0.2f, 0.5f, 0.0f);
-            GL.Vertex3(0.2f, 0.5f, -0.05f);
-
-            //Antenas
-            GL.Color4(Color4.White);
-
-            GL.Vertex3(0.45f, 0.5f, 0.0f);
-            GL.Vertex3(0.35f, 0.6f, 0.0f);
-
-            GL.Vertex3(0.45f, 0.5f, 0.0f);
-            GL.Vertex3(0.55f, 0.6f, 0.0f);
-
-            GL.End();
-
-            //GL.Begin(BeginMode.LineLoop);
-            //GL.Vertex3(0.25f, 0.25f, -0.06f);
-            //GL.Vertex3(0.65f, 0.25f, -0.06f);
-            //GL.Vertex3(0.65f, 0.45f, -0.06f);
-            //GL.Vertex3(0.25f, 0.45f, -0.06f);
-            //GL.End();
-
-            GL.Begin(BeginMode.LineLoop);
-            GL.Vertex3(0.22f, 0.22f, 0.0f);
-            GL.Vertex3(0.68f, 0.22f, 0.0f);
-            GL.Vertex3(0.68f, 0.48f, 0.0f);
-            GL.Vertex3(0.22f, 0.48f, 0.0f);
-            GL.End();
+            tv.Draw();
+            tv2.Draw();
 
             Context.SwapBuffers();
         }
