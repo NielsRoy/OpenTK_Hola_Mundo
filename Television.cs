@@ -357,57 +357,6 @@ namespace OpenTK_Hola_Mundo
             GL.Vertex3(0.23f + center.X, 0.03f + center.Y, 0.1f + center.Z);
 
             GL.End();
-            //------ old version
-
-            //GL.Color4(Color4.White);
-            //GL.Begin(BeginMode.LineLoop);
-            //GL.Vertex3(center.X + 0.2f, center.Y + 0.2f, center.Z + 0.0f);
-            //GL.Vertex3(center.X + 0.7f, center.Y + 0.2f, center.Z + 0.0f);
-            //GL.Vertex3(center.X + 0.7f, center.Y + 0.5f, center.Z + 0.0f);
-            //GL.Vertex3(center.X + 0.2f, center.Y + 0.5f, center.Z + 0.0f);
-            //GL.End();
-
-            //GL.Color4(Color4.Gray);
-            //GL.Begin(BeginMode.LineLoop);
-            //GL.Vertex3(center.X + 0.2f, center.Y + 0.2f, -0.05f + center.Z);
-            //GL.Vertex3(center.X + 0.7f, center.Y + 0.2f, -0.05f + center.Z);
-            //GL.Vertex3(center.X + 0.7f, center.Y + 0.5f, -0.05f + center.Z);
-            //GL.Vertex3(center.X + 0.2f, center.Y + 0.5f, -0.05f + center.Z);
-            //GL.End();
-
-
-
-            //GL.Begin(BeginMode.Lines);
-
-            //GL.Vertex3(0.2f + center.X, 0.2f + center.Y, 0.0f + center.Z);
-            //GL.Vertex3(0.2f + center.X, 0.2f + center.Y, -0.05f + center.Z);
-
-            //GL.Vertex3(0.7f + center.X, 0.2f + center.Y, 0.0f + center.Z);
-            //GL.Vertex3(0.7f + center.X, 0.2f + center.Y, -0.05f + center.Z);
-
-            //GL.Vertex3(0.7f + center.X, 0.5f + center.Y, 0.0f + center.Z);
-            //GL.Vertex3(0.7f + center.X, 0.5f + center.Y, -0.05f + center.Z);
-
-            //GL.Vertex3(0.2f + center.X, 0.5f + center.Y, 0.0f + center.Z);
-            //GL.Vertex3(0.2f + center.X, 0.5f + center.Y, -0.05f + center.Z);
-
-            ////Antenas
-            //GL.Color4(Color4.White);
-
-            //GL.Vertex3(0.45f + center.X, 0.5f + center.Y, 0.0f + center.Z);
-            //GL.Vertex3(0.35f + center.X, 0.6f + center.Y, 0.0f + center.Z);
-
-            //GL.Vertex3(0.45f + center.X, 0.5f + center.Y, 0.0f + center.Z);
-            //GL.Vertex3(0.55f + center.X, 0.6f + center.Y, 0.0f + center.Z);
-
-            //GL.End();
-
-            //GL.Begin(BeginMode.LineLoop);
-            //GL.Vertex3(0.22f + center.X, 0.22f + center.Y, 0.0f + center.Z);
-            //GL.Vertex3(0.68f + center.X, 0.22f + center.Y, 0.0f + center.Z);
-            //GL.Vertex3(0.68f + center.X, 0.48f + center.Y, 0.0f + center.Z);
-            //GL.Vertex3(0.22f + center.X, 0.48f + center.Y, 0.0f + center.Z);
-            //GL.End();
         }
     }
 }
