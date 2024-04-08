@@ -9,9 +9,8 @@ namespace OpenTK_Hola_Mundo
 {
     public class Game : GameWindow
     {
-        Television tv;
-        Television tv2;
-
+        Stage stage;
+        float theta = 0.0f;
 
         public Game(int width, int height, string title) : base(width, height, GraphicsMode.Default, title) { }
 
@@ -23,9 +22,19 @@ namespace OpenTK_Hola_Mundo
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
             GL.Enable(EnableCap.DepthTest);
+            GL.DepthFunc(DepthFunction.Lequal);
 
-            tv = new Television(new Vector3(0.2f, 0.2f, 0.5f));
-            tv2 = new Television(new Vector3(0.5f, 0.5f, 0.0f));
+            GL.Enable(EnableCap.Blend);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+
+            Object tv = new Object(10.0f, 1.0f, -6.0f);
+            Object tv2 = new Object(-20.0f, 5.0f, 0.0f);
+            tv.setFaces(Television.getFaces());
+            tv2.setFaces(Television.getFaces());
+
+            stage = new Stage(5.0f, 4.0f, -10.0f);
+            stage.AddObject("tv-1", tv);
+            stage.AddObject("tv-2", tv2);
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -35,26 +44,20 @@ namespace OpenTK_Hola_Mundo
             GL.LoadIdentity();
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            GL.Translate(0.0f, 0.0f, -3.0f);
+            GL.Translate(0.0f, 0.0f, -45.0f);
+            //GL.Rotate(theta, 1.0, 0.0, 0.0);
             GL.Rotate(25.0f, 1.0, 0.0, 0.0);
-            GL.Rotate(-45.0f, 0.0, 1.0, 0.0);
+            GL.Rotate(theta, 0.0, 0.5, 0.0);
 
-            GL.Begin(BeginMode.Lines);
-            GL.Color4(Color4.Cyan);
-            GL.Vertex3(0.0f, 0.0f, 0.0f);
-            GL.Vertex3(1.0f, 0.0f, 0.0f);
+            Axises.Draw(new Vector3(0, 0, 0), 30);
 
-            GL.Color4(Color4.Magenta);
-            GL.Vertex3(0.0f, 0.0f, 0.0f);
-            GL.Vertex3(0.0f, 1.0f, 0.0f);
+            //Usar el metodo GL.Scale() es riesgoso solo se debe usar sobre vertices con origen  en (0,0,0)
+            //Y luego despues de escalar recien sumarle el centro del objeto ya que sino disparara como
+            //loco los objetos a direcciones muy lejanas
+            stage.Draw();
 
-            GL.Color4(Color4.Yellow);
-            GL.Vertex3(0.0f, 0.0f, 0.0f);
-            GL.Vertex3(0.0f, 0.0f, 1.0f);
-            GL.End();
-
-            tv.Draw();
-            tv2.Draw();
+            theta += 1.0f;
+            if (theta > 360) theta -= 360; 
 
             Context.SwapBuffers();
         }
@@ -67,8 +70,9 @@ namespace OpenTK_Hola_Mundo
             GL.Viewport(0, 0, Width, Height);
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
-            Matrix4 matrix = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45.0f), Width/Height, 1.0f, 100.0f);
-            GL.LoadMatrix(ref matrix);
+
+            GL.Frustum(-1.0f, 1.0f, -1.0f, 1.0f, 0.8f, 100.0f);
+            
             GL.MatrixMode(MatrixMode.Modelview);
         }
 
