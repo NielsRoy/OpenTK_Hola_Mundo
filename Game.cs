@@ -31,10 +31,16 @@ namespace OpenTK_Hola_Mundo
             Object tv2 = new Object(-20.0f, 5.0f, 0.0f);
             tv.setFaces(Television.getFaces());
             tv2.setFaces(Television.getFaces());
+            Object flower = new Object(20.0f, 5.0f, 3.0f);
+            flower.setFaces(Flower.getFaces());
+            Object speaker = new Object(-7.0f, 8.0f, -10.0f);
+            speaker.setFaces(Speaker.getFaces());
 
             stage = new Stage(5.0f, 4.0f, -10.0f);
             stage.AddObject("tv-1", tv);
             stage.AddObject("tv-2", tv2);
+            stage.AddObject("fw-1", flower);
+            stage.AddObject("spk-1", speaker);
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)

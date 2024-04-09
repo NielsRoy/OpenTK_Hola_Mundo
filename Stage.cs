@@ -33,11 +33,12 @@ namespace OpenTK_Hola_Mundo
         public void Draw()
         {
             Axises.Draw(center, 30);
-            Axises.DrawFloor(center, 60);
+            //Si dibujo aqui el piso la parte de los objetos que esten debajo del piso no se veran
             foreach (KeyValuePair<string, Object> obj in objects)
             {
                 obj.Value.Draw();
             }
+            Axises.DrawFloor(center, 60);
         }
     }
 }
