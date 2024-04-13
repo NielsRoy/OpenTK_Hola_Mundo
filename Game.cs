@@ -28,12 +28,12 @@ namespace OpenTK_Hola_Mundo
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
             Object tv = new Object(10.0f, 1.0f, -6.0f);
-            Object tv2 = new Object(-20.0f, 5.0f, 0.0f);
+            Object tv2 = new Object(-25.0f, 5.0f, 0.0f);
             tv.setFaces(Television.getFaces());
             tv2.setFaces(Television.getFaces());
-            Object flower = new Object(20.0f, 5.0f, 3.0f);
+            Object flower = new Object(24.0f, 1.0f, 3.0f);
             flower.setFaces(Flower.getFaces());
-            Object speaker = new Object(-7.0f, 8.0f, -10.0f);
+            Object speaker = new Object(-7.0f, 1.0f, -10.0f);
             speaker.setFaces(Speaker.getFaces());
 
             stage = new Stage(5.0f, 4.0f, -10.0f);
