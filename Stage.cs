@@ -1,12 +1,16 @@
-﻿using OpenTK;
+﻿using Newtonsoft.Json;
+using OpenTK;
+using System;
 using System.Collections.Generic;
+//using System.Text.Json;
+
 
 namespace OpenTK_Hola_Mundo
 {
     internal class Stage
     {
-        private Vector3 center;
-        private Dictionary<string, Object> objects;
+        public Vector3 center;
+        public Dictionary<string, Object> objects;
 
         public Stage(float x, float y, float z)
         {
@@ -39,6 +43,12 @@ namespace OpenTK_Hola_Mundo
                 obj.Value.Draw();
             }
             Axises.DrawFloor(center, 60);
+        }
+
+        public void Serialize()
+        {
+            string json = JsonConvert.SerializeObject(this);
+            Console.WriteLine(json);
         }
     }
 }

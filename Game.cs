@@ -38,9 +38,10 @@ namespace OpenTK_Hola_Mundo
 
             stage = new Stage(5.0f, 4.0f, -10.0f);
             stage.AddObject("tv-1", tv);
-            stage.AddObject("tv-2", tv2);
-            stage.AddObject("fw-1", flower);
-            stage.AddObject("spk-1", speaker);
+            //stage.AddObject("tv-2", tv2);
+            //stage.AddObject("fw-1", flower);
+            //stage.AddObject("spk-1", speaker);
+            stage.Serialize();
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -57,9 +58,6 @@ namespace OpenTK_Hola_Mundo
 
             Axises.Draw(new Vector3(0, 0, 0), 30);
 
-            //Usar el metodo GL.Scale() es riesgoso solo se debe usar sobre vertices con origen  en (0,0,0)
-            //Y luego despues de escalar recien sumarle el centro del objeto ya que sino disparara como
-            //loco los objetos a direcciones muy lejanas
             stage.Draw();
 
             theta += 1.0f;

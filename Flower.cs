@@ -15,7 +15,7 @@ namespace OpenTK_Hola_Mundo
             Color4 m03___Default = new Color4(0.314f, 0.055f, 0.071f, 1.0f);
             Color4 m02___Default = new Color4(0.674f, 0.459f, 0.620f, 1.0f);
             Color4 m07___Default = new Color4(0.153f, 0.031f, 0.0f, 1.0f);
-            Color4 Material__289 = new Color4(0.588f, 0.588f, 0.588f, 1.0f);
+            Color4 Material__289 = new Color4(0.788f, 0.788f, 0.788f, 1.0f);
 
             Face f1 = new Face(m05___Default);
             f1.AddVertex(-0.04755f, 2.32064f, -0.17606f);
