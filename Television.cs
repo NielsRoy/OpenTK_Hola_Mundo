@@ -482,14 +482,12 @@ namespace OpenTK_Hola_Mundo
             //Aumentando el tamaño x30
             foreach (Face f in faces)
             {
-                List<Vector3> vertices = f.GetVertices();
+                List<Vertex> vertices = f.GetVertices();
                 for (int i = 0; i < vertices.Count; i++)
                 {
-                    Vector3 vertex = vertices[i];
-                    vertex.X *= 20;
-                    vertex.Y *= 20;
-                    vertex.Z *= 20;
-                    vertices[i] = vertex;
+                    vertices[i].x *= 20;
+                    vertices[i].y *= 20;
+                    vertices[i].z *= 20;
                 }
             }
             //Luego este proceso sera pasado a la class Object

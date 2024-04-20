@@ -10,6 +10,7 @@ namespace OpenTK_Hola_Mundo
     public class Game : GameWindow
     {
         Stage stage;
+
         float theta = 0.0f;
 
         public Game(int width, int height, string title) : base(width, height, GraphicsMode.Default, title) { }
@@ -27,21 +28,33 @@ namespace OpenTK_Hola_Mundo
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
-            Object tv = new Object(10.0f, 1.0f, -6.0f);
-            Object tv2 = new Object(-25.0f, 5.0f, 0.0f);
-            tv.setFaces(Television.getFaces());
-            tv2.setFaces(Television.getFaces());
-            Object flower = new Object(24.0f, 1.0f, 3.0f);
-            flower.setFaces(Flower.getFaces());
-            Object speaker = new Object(-7.0f, 1.0f, -10.0f);
-            speaker.setFaces(Speaker.getFaces());
+            //Object tv = new Object(10.0f, 1.0f, -6.0f);
+            //Object tv2 = new Object(-25.0f, 5.0f, 0.0f);
+            //tv.faces = Television.getFaces();
+            //tv.Serialize("tv.json");
+            //tv2.faces = Television.getFaces();
+            //Object flower = new Object(24.0f, 1.0f, 3.0f);
+            //flower.faces = Flower.getFaces();
+            //flower.Serialize("flower.json");
+            //Object speaker = new Object(-7.0f, 1.0f, -10.0f);
+            //speaker.faces = Speaker.getFaces();
+            //speaker.Serialize("speaker.json");
+
+            Object tv = new Object("tv.json");
+            Object flower = new Object("flower.json");
+            Object speaker = new Object("speaker.json");
+
 
             stage = new Stage(5.0f, 4.0f, -10.0f);
             stage.AddObject("tv-1", tv);
             //stage.AddObject("tv-2", tv2);
-            //stage.AddObject("fw-1", flower);
-            //stage.AddObject("spk-1", speaker);
-            stage.Serialize();
+            stage.AddObject("fw-1", flower);
+            stage.AddObject("spk-1", speaker);
+            //stage.Serialize();
+
+
+
+            //stage = new Stage("stage.json");
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -56,7 +69,7 @@ namespace OpenTK_Hola_Mundo
             GL.Rotate(25.0f, 1.0, 0.0, 0.0);
             GL.Rotate(theta, 0.0, 0.5, 0.0);
 
-            Axises.Draw(new Vector3(0, 0, 0), 30);
+            Axises.Draw(new Vertex(0, 0, 0), 30);
 
             stage.Draw();
 

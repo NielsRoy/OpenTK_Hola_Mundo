@@ -1,41 +1,33 @@
-﻿using OpenTK;
+﻿using Newtonsoft.Json;
+using OpenTK;
 using System.Collections.Generic;
+using System.IO;
 
 namespace OpenTK_Hola_Mundo
 {
     internal class Object
     {
-        private Vector3 center;
-        private List<Face> faces;
+        public Vertex center { get; set; }
+        public List<Face> faces { get; set; }
+
+        public Object() { }
 
         public Object(float x, float y, float z)
         {
-            center = new Vector3(x, y, z);
+            center = new Vertex(x, y, z);
             faces = new List<Face>();
         }
 
-        public Vector3 GetCenter()
+        public Object(string filePath)
         {
-            return center;
+            using (StreamReader fileReader = new StreamReader(filePath))
+            {
+                Object stage = JsonConvert.DeserializeObject<Object>(fileReader.ReadToEnd());
+                center = stage.center;
+                faces = stage.faces;
+            }
         }
-
-        public void AddToStage(Stage stage)
-        {
-            center.X += stage.GetCenter().X;
-            center.Y += stage.GetCenter().Y;
-            center.Z += stage.GetCenter().Z;
-        }
-
-        public void setFaces(List<Face> faces)
-        {
-            this.faces = faces;
-        }
-
-        public void AddFace(Face f)
-        {
-            faces.Add(f);
-        }
-
+        
         public void Draw()
         {
             Axises.Draw(center, 10);
@@ -45,5 +37,14 @@ namespace OpenTK_Hola_Mundo
             }
         }
 
+        public void Serialize(string filename = "object.json")
+        {
+            filename = filename.Contains(".json") ? filename : filename + ".json";
+            string json = JsonConvert.SerializeObject(this);
+            using (StreamWriter fileWriter = new StreamWriter(filename))
+            {
+                fileWriter.WriteLine(json);
+            }
+        }
     }
 }

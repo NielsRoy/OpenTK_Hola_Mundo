@@ -1,13 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Newtonsoft.Json;
 
 namespace OpenTK_Hola_Mundo
 {
     internal class Vertex
     {
-        public float X;
-        public float Y;
-        public float Z;
+        public float x { get; set; }
+        public float y { get; set; }
+        public float z { get; set; }
+
+        public Vertex(float x, float y, float z)
+        {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
     }
 }

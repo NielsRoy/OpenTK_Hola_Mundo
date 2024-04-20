@@ -2732,14 +2732,12 @@ namespace OpenTK_Hola_Mundo
 
             foreach (Face f in faces)
             {
-                List<Vector3> vertices = f.GetVertices();
+                List<Vertex> vertices = f.GetVertices();
                 for (int i = 0; i < vertices.Count; i++)
                 {
-                    Vector3 vertex = vertices[i];
-                    vertex.X *= 15;
-                    vertex.Y *= 15;
-                    vertex.Z *= 15;
-                    vertices[i] = vertex;
+                    vertices[i].x *= 15;
+                    vertices[i].y *= 15;
+                    vertices[i].z *= 15;
                 }
             }
 
