@@ -2,7 +2,7 @@
 
 namespace OpenTK_Hola_Mundo
 {
-    internal class Vertex
+    public class Vertex
     {
         public float x { get; set; }
         public float y { get; set; }

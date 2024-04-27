@@ -8,9 +8,13 @@ namespace OpenTK_Hola_Mundo
     internal class Object
     {
         public Vertex center { get; set; }
+        public Vertex origin { get; set; }
         public List<Face> faces { get; set; }
 
-        public Object() { }
+        public Object() 
+        {
+            center = new Vertex(0, 0, 0);
+        }
 
         public Object(float x, float y, float z)
         {
@@ -22,18 +26,74 @@ namespace OpenTK_Hola_Mundo
         {
             using (StreamReader fileReader = new StreamReader(filePath))
             {
-                Object stage = JsonConvert.DeserializeObject<Object>(fileReader.ReadToEnd());
-                center = stage.center;
-                faces = stage.faces;
+                Object obj = JsonConvert.DeserializeObject<Object>(fileReader.ReadToEnd());
+                center = obj.center;
+                faces = obj.faces;
+            }
+
+            //AddFaces(faces);
+        }
+
+        public void setOrigin(Vertex origin)
+        {
+            this.origin = origin;
+            center.x += origin.x;
+            center.y += origin.y;
+            center.z += origin.z;
+
+            foreach (Face face in faces)
+            {
+                face.origin = center;
+                face.Translate(center.x, center.y, center.z);
             }
         }
-        
-        public void Draw()
+
+        public void Translate(float x, float y, float z)
         {
-            Axises.Draw(center, 10);
+            foreach (Face face in faces)
+            {
+                face.Translate(x, y, z);
+            }
+        }
+
+        public void ScaleWithStage(float n)
+        {
+            foreach (Face face in faces)
+            {
+                face.ScaleWithStage(n);
+            }
+        }
+
+        public void Scale(float n)
+        {
+            foreach (Face face in faces)
+            {
+                face.Scale(n);
+            }
+        }
+
+        public void RotateWithStage(string axis, float grades)
+        {
             foreach (Face f in faces)
             {
-                f.Draw(center);
+                f.RotateWithStage(axis, grades);
+            }
+        }
+
+        public void Rotate(string axis, float grades)
+        {
+            foreach (Face f in faces)
+            {
+                f.Rotate(axis, grades);
+            }
+        }
+
+        public void Draw()
+        {
+            //Axises.Draw(center, 10);
+            foreach (Face f in faces)
+            {
+                f.Draw();
             }
         }
 

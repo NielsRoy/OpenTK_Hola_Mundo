@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Axises.cs" />
     <Compile Include="Face.cs" />
+    <Compile Include="Floor.cs" />
     <Compile Include="Flower.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Object.cs" />

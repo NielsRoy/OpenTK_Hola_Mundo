@@ -41,17 +41,19 @@ namespace OpenTK_Hola_Mundo
             //speaker.Serialize("speaker.json");
 
             Object tv = new Object("tv.json");
-            Object flower = new Object("flower.json");
+            //Object flower = new Object("flower.json");
             Object speaker = new Object("speaker.json");
 
+            Object floor = new Object();
+            floor.faces = Floor.getFaces();
 
             stage = new Stage(5.0f, 4.0f, -10.0f);
             stage.AddObject("tv-1", tv);
             //stage.AddObject("tv-2", tv2);
-            stage.AddObject("fw-1", flower);
+            //stage.AddObject("fw-1", flower);
             stage.AddObject("spk-1", speaker);
+            stage.AddObject("flr-1", floor);
             //stage.Serialize();
-
 
 
             //stage = new Stage("stage.json");
@@ -67,19 +69,24 @@ namespace OpenTK_Hola_Mundo
             GL.Translate(0.0f, 0.0f, -45.0f);
             //GL.Rotate(theta, 1.0, 0.0, 0.0);
             GL.Rotate(25.0f, 1.0, 0.0, 0.0);
-            GL.Rotate(theta, 0.0, 0.5, 0.0);
+            //GL.Rotate(theta, 0.0, 0.5, 0.0);
 
             Axises.Draw(new Vertex(0, 0, 0), 30);
 
+            //Object spk = stage.GetObject("spk-1");
+            //spk.Rotate("y", 2);
+            //stage.Rotate("y", 1);
             stage.Draw();
+            Object tv = stage.GetObject("spk-1");
+            tv.Rotate("y", 2);
+            //tv.Scale(1.01f);
 
-            theta += 1.0f;
-            if (theta > 360) theta -= 360; 
+            //theta += 1.0f;
+            //if (theta > 360) theta -= 360; 
 
             Context.SwapBuffers();
         }
 
-        //This function runs every time the window gets resized.
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);

@@ -11,7 +11,10 @@ namespace OpenTK_Hola_Mundo
         public Vertex center { get; set; }
         public Dictionary<string, Object> objects { get; set; }
 
-        public Stage() { }
+        public Stage() 
+        {
+            center = new Vertex(0, 0, 0);
+        }
 
         public Stage(float x, float y, float z)
         {
@@ -49,23 +52,42 @@ namespace OpenTK_Hola_Mundo
         public void AddObject(string name, Object obj)
         {
             objects.Add(name, obj);
-            obj.center.x += center.x;
-            obj.center.y += center.y;
-            obj.center.z += center.z;
+            obj.setOrigin(center);
+        }
+
+        public void Translate(float x, float y, float z)
+        {
+            foreach (Object obj in objects.Values)
+            {
+                obj.Translate(x, y, z);
+            }
+        }
+
+        public void Scale(float n)
+        {
+            foreach (Object obj in objects.Values)
+            {
+                obj.ScaleWithStage(n);
+            }
+        }
+
+        public void Rotate(string axis, float grades)
+        {
+            foreach (Object obj in objects.Values)
+            {
+                obj.RotateWithStage(axis, grades);
+            }
         }
 
         public void Draw()
         {
-            if (center == null || objects == null)
-                return;
-
-            Axises.Draw(center, 30);
+            //Axises.Draw(center, 30);
             //Si dibujo aqui el piso la parte de los objetos que esten debajo del piso no se veran
             foreach (Object obj in objects.Values)
             {
                 obj.Draw();
             }
-            Axises.DrawFloor(center, 60);
+            //Axises.DrawFloor(center, 60);
         }
 
         public void Serialize(string filename = "stage.json")
