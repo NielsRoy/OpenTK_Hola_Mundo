@@ -20195,12 +20195,11 @@ namespace OpenTK_Hola_Mundo
 
             foreach (Face f in faces)
             {
-                List<Vertex> vertices = f.GetVertices();
-                for (int i = 0; i < vertices.Count; i++)
+                for (int i = 0; i < f.vertices.Count; i++)
                 {
-                    vertices[i].x *= 3;
-                    vertices[i].y *= 3;
-                    vertices[i].z *= 3;
+                    f.vertices[i].x *= 3;
+                    f.vertices[i].y *= 3;
+                    f.vertices[i].z *= 3;
                 }
             }
 

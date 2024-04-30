@@ -41,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -49,12 +50,14 @@
     <Compile Include="Floor.cs" />
     <Compile Include="Flower.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="IDrawable.cs" />
     <Compile Include="Object.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Speaker.cs" />
     <Compile Include="Stage.cs" />
     <Compile Include="Television.cs" />
+    <Compile Include="Utilities\ObjectFile.cs" />
     <Compile Include="Vertex.cs" />
   </ItemGroup>
   <ItemGroup>

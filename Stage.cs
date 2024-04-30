@@ -1,12 +1,10 @@
-﻿using Newtonsoft.Json;
-using OpenTK;
+﻿using OpenTK;
 using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace OpenTK_Hola_Mundo
 {
-    internal class Stage
+    internal class Stage : IDrawable
     {
         public Vertex center { get; set; }
         public Dictionary<string, Object> objects { get; set; }
@@ -22,39 +20,6 @@ namespace OpenTK_Hola_Mundo
             objects = new Dictionary<string, Object>();
         }
 
-        public Stage(string filePath)
-        {
-            try
-            {
-                using (StreamReader fileReader = new StreamReader(filePath))
-                {
-                    Stage stage = JsonConvert.DeserializeObject<Stage>(fileReader.ReadToEnd());
-                    center = stage.center;
-                    objects = stage.objects;
-                }
-            }
-            catch (FileNotFoundException ex)
-            {
-                Console.WriteLine($"No se pudo encontrar el archivo: {ex.Message}");
-            }
-        }
-
-        public Vertex GetCenter()
-        {
-            return center;
-        }
-
-        public Object GetObject(string name)
-        {
-            return objects.ContainsKey(name) ? objects[name] : null;
-        }
-
-        public void AddObject(string name, Object obj)
-        {
-            objects.Add(name, obj);
-            obj.setOrigin(center);
-        }
-
         public void Translate(float x, float y, float z)
         {
             foreach (Object obj in objects.Values)
@@ -67,7 +32,7 @@ namespace OpenTK_Hola_Mundo
         {
             foreach (Object obj in objects.Values)
             {
-                obj.ScaleWithStage(n);
+                obj.ScaleWithStage(center, n);
             }
         }
 
@@ -75,7 +40,7 @@ namespace OpenTK_Hola_Mundo
         {
             foreach (Object obj in objects.Values)
             {
-                obj.RotateWithStage(axis, grades);
+                obj.RotateWithStage(center, axis, grades);
             }
         }
 
@@ -85,19 +50,10 @@ namespace OpenTK_Hola_Mundo
             //Si dibujo aqui el piso la parte de los objetos que esten debajo del piso no se veran
             foreach (Object obj in objects.Values)
             {
+                obj.Translate(center.x, center.y, center.z);
                 obj.Draw();
             }
             //Axises.DrawFloor(center, 60);
-        }
-
-        public void Serialize(string filename = "stage.json")
-        {
-            filename = filename.Contains(".json") ? filename : filename + ".json";
-            string json = JsonConvert.SerializeObject(this);
-            using (StreamWriter fileWriter = new StreamWriter(filename))
-            {
-                fileWriter.WriteLine(json);
-            }
         }
     }
 }

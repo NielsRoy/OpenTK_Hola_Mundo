@@ -1,14 +1,11 @@
-﻿using Newtonsoft.Json;
-using OpenTK;
+﻿using OpenTK;
 using System.Collections.Generic;
-using System.IO;
 
 namespace OpenTK_Hola_Mundo
 {
-    internal class Object
+    internal class Object : IDrawable
     {
         public Vertex center { get; set; }
-        public Vertex origin { get; set; }
         public List<Face> faces { get; set; }
 
         public Object() 
@@ -22,45 +19,11 @@ namespace OpenTK_Hola_Mundo
             faces = new List<Face>();
         }
 
-        public Object(string filePath)
-        {
-            using (StreamReader fileReader = new StreamReader(filePath))
-            {
-                Object obj = JsonConvert.DeserializeObject<Object>(fileReader.ReadToEnd());
-                center = obj.center;
-                faces = obj.faces;
-            }
-
-            //AddFaces(faces);
-        }
-
-        public void setOrigin(Vertex origin)
-        {
-            this.origin = origin;
-            center.x += origin.x;
-            center.y += origin.y;
-            center.z += origin.z;
-
-            foreach (Face face in faces)
-            {
-                face.origin = center;
-                face.Translate(center.x, center.y, center.z);
-            }
-        }
-
         public void Translate(float x, float y, float z)
         {
             foreach (Face face in faces)
             {
                 face.Translate(x, y, z);
-            }
-        }
-
-        public void ScaleWithStage(float n)
-        {
-            foreach (Face face in faces)
-            {
-                face.ScaleWithStage(n);
             }
         }
 
@@ -72,11 +35,12 @@ namespace OpenTK_Hola_Mundo
             }
         }
 
-        public void RotateWithStage(string axis, float grades)
+        public void ScaleWithStage(Vertex origin, float n)
         {
-            foreach (Face f in faces)
+            Vertex v = new Vertex(origin.x + center.x, origin.y + center.y, origin.z + center.z);
+            foreach (Face face in faces)
             {
-                f.RotateWithStage(axis, grades);
+                face.ScaleWithStage(v, n);
             }
         }
 
@@ -88,22 +52,23 @@ namespace OpenTK_Hola_Mundo
             }
         }
 
+        public void RotateWithStage(Vertex origin, string axis, float grades)
+        {
+            Vertex v = new Vertex(origin.x + center.x, origin.y + center.y, origin.z + center.z);
+            foreach (Face f in faces)
+            {
+                f.RotateWithStage(v, axis, grades);
+            }
+        }
+
         public void Draw()
         {
             //Axises.Draw(center, 10);
             foreach (Face f in faces)
             {
+                f.Translate(center.x, center.y, center.z);
                 f.Draw();
-            }
-        }
-
-        public void Serialize(string filename = "object.json")
-        {
-            filename = filename.Contains(".json") ? filename : filename + ".json";
-            string json = JsonConvert.SerializeObject(this);
-            using (StreamWriter fileWriter = new StreamWriter(filename))
-            {
-                fileWriter.WriteLine(json);
+                //f.Draw(new Vertex(origin.x + center.x, origin.y + center.y, origin.z + center.z));
             }
         }
     }
